@@ -7,6 +7,9 @@ console.log(process.env.PORT)
 app.get('/',(req,res)=>{
     res.send("Working now")
 })
+app.get('/products',(req,res)=>{
+    res.send("product page")
+})
 
 app.listen(port,()=>{
     console.log("Listening on port",port)
