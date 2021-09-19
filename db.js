@@ -50,21 +50,10 @@ const getProductbyId = async (id)=>{
     return await dynamoClient.get(params).promise()
 }
 
-// function for deleting product
-const deleteProductbyId = async (id)=>{
-    const params = {
-        TableName:Table_Name,
-        Key:{
-            id
-        }
-    }
-    return await dynamoClient.delete(params).promise()
-}
 
 module.exports = {
     dynamoClient,
     getProducts,
     getProductbyId,
-    deleteProductbyId,
     addProduct
 }

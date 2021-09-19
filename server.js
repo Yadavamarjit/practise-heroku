@@ -1,13 +1,18 @@
 const express= require('express')
 const app=express()
-require('dotenv').config()
+const cors = require('cors')
 const {getProducts} =require('./db')
+require('dotenv').config()
 const port = process.env.PORT || 3000
-console.log(process.env.PORT)
+
+// using cors so that data can be accessed by frontend
+app.use(cors())
 
 app.get('/',(req,res)=>{
     res.send("Working now")
 })
+
+// showing data products data on /product endpoint
 app.get('/products',async(req,res)=>{
     try{
         const product =await getProducts()
