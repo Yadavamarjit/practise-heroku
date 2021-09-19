@@ -1,9 +1,8 @@
 const express= require('express')
 const app=express()
-const config = require('./config')
-// require('dotenv').config()
-const port = config.app.port || 3000
-
+require('dotenv').config()
+const port = process.env.PORT || 3000
+console.log(process.env.PORT)
 
 app.get('/',(req,res)=>{
     res.send("Working now")

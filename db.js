@@ -1,6 +1,5 @@
-const config = require('./config')
-const {db:{Id,SECRET,REGION}}=config
-
-console.log(Id)
-console.log(SECRET)
-console.log(REGION)
+require("dotenv").config()
+const id=process.env.AWS_ID
+const secret=process.env.AWS_SECRET
+const region=process.env.AWS_DEFAULT_REGION
+console.log(id,region,secret)
