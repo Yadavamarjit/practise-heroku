@@ -3,7 +3,6 @@ require("dotenv").config()
 const id=process.env.AWS_ID
 const secret=process.env.AWS_SECRET
 const region=process.env.AWS_DEFAULT_REGION
-console.log(id,region,secret)
 
 
 // Aws congfiguration
@@ -28,7 +27,15 @@ const getProducts =async ()=>{
     console.log(product)
     return product
 }
-getProducts()
+const getClicks =async ()=>{
+    const params ={
+        TableName:"clicks"
+    }
+    const clicked =await dynamoClient.scan(params).promise()
+    console.log(clicked.Items[0].clicked)
+    return parseInt(clicked.Items[0].clicked)+1
+}
+// getProducts()
 // function for adding product
 
 const addProduct = async (products)=>{
@@ -38,7 +45,13 @@ const addProduct = async (products)=>{
     }
     return await dynamoClient.put(params).promise()
 }
-
+const addClick = async (click)=>{
+    const params = {
+        TableName:"clicks",
+        Item:click
+    }
+    return await dynamoClient.put(params).promise()
+}
 // function for getting single product
 const getProductbyId = async (id)=>{
     const params = {
@@ -49,11 +62,13 @@ const getProductbyId = async (id)=>{
     }
     return await dynamoClient.get(params).promise()
 }
-
+// console.log()
 
 module.exports = {
     dynamoClient,
     getProducts,
     getProductbyId,
-    addProduct
+    addProduct,
+    addClick,
+    getClicks
 }
